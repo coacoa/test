@@ -2,26 +2,30 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>スクロールでSVGアニメーション</title>
+  <title>スクロールSVGアニメーション</title>
   <style>
     body {
-      height: 2000px; /* 縦に長くしてスクロールできるように */
+      height: 2000px; /* スクロールできるようにする */
       margin: 0;
       padding: 0;
+      background-color: white; /* 背景を白にする */
     }
+
     svg {
       position: fixed;
       top: 50px;
       left: 50px;
       width: 400px;
       height: 400px;
+      border: 1px solid #ccc;
     }
+
     path {
-      stroke: black;
+      stroke: red;              /* はっきり見える色に変更 */
       stroke-width: 2;
       fill: none;
-      stroke-dasharray: 1000;
-      stroke-dashoffset: 1000;
+      stroke-dasharray: 1000;   /* 線の長さを指定 */
+      stroke-dashoffset: 1000;  /* 最初は描かれていない状態 */
     }
   </style>
 </head>
@@ -35,12 +39,10 @@
   const path = document.getElementById('line');
 
   window.addEventListener('scroll', () => {
-    // スクロールの進行度（0〜1）を計算
     const scrollTop = window.scrollY;
     const scrollHeight = document.body.scrollHeight - window.innerHeight;
     const progress = scrollTop / scrollHeight;
 
-    // stroke-dashoffset を変化させてアニメ制御
     const offset = 1000 - (1000 * progress);
     path.setAttribute('stroke-dashoffset', offset);
   });
