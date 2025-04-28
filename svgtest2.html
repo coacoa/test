@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>PlantUMLシーケンス図アニメ</title>
+  <style>
+    body {
+      height: 3000px; /* スクロール量を増やしてみた */
+      margin: 0;
+      background: white;
+    }
+    svg {
+      position: fixed;
+      top: 50px;
+      left: 50px;
+      width: 600px;
+      height: 600px;
+      border: 1px solid #ccc;
+      background: #fff;
+    }
+    path {
+      stroke: #333;
+      stroke-width: 2;
+      fill: none;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ▼SVGを直接HTMLに埋め込み -->
+<svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- ここでは簡単に矢印の線だけ作った例 -->
+  <path d="M100,50 L300,50" />
+  <path d="M300,100 L100,100" />
+  <path d="M100,150 L300,150" />
+  <path d="M300,200 L100,200" />
+</svg>
+
+<script>
+  const paths = document.querySelectorAll('svg path');
+
+  paths.forEach((path) => {
+    const length = path.getTotalLength();
+    path.style.strokeDasharray = length;
+    path.style.strokeDashoffset = length;
+    path.style.transition = 'stroke-dashoffset 1s ease-out';
+  });
+
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const scrollHeight = document.body.scrollHeight - window.innerHeight;
+    const progress = scrollTop / scrollHeight;
+    const current = Math.floor(progress * paths.length);
+
+    paths.forEach((path, index) => {
+      const length = path.getTotalLength();
+      if (index <= current) {
+        path.style.strokeDashoffset = 0;
+      } else {
+        path.style.strokeDashoffset = length;
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
+
