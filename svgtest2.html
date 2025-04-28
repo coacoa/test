@@ -2,10 +2,10 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>PlantUMLシーケンス図アニメ</title>
+  <title>PlantUML風シーケンス図アニメ</title>
   <style>
     body {
-      height: 3000px; /* スクロール量を増やしてみた */
+      height: 3000px;
       margin: 0;
       background: white;
     }
@@ -23,17 +23,34 @@
       stroke-width: 2;
       fill: none;
     }
+    text {
+      font-size: 20px;
+      fill: black;
+      text-anchor: middle;
+    }
+    circle {
+      fill: #eee;
+      stroke: #333;
+      stroke-width: 2;
+    }
   </style>
 </head>
 <body>
 
-<!-- ▼SVGを直接HTMLに埋め込み -->
+<!-- ▼SVGをHTMLに直接書く -->
 <svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
-  <!-- ここでは簡単に矢印の線だけ作った例 -->
-  <path d="M100,50 L300,50" />
-  <path d="M300,100 L100,100" />
-  <path d="M100,150 L300,150" />
-  <path d="M300,200 L100,200" />
+  <!-- AliceとBobのアイコン -->
+  <circle cx="100" cy="30" r="20" />
+  <text x="100" y="30" dy="8">Alice</text>
+
+  <circle cx="300" cy="30" r="20" />
+  <text x="300" y="30" dy="8">Bob</text>
+
+  <!-- 矢印線たち -->
+  <path d="M100,80 L300,80" />
+  <path d="M300,130 L100,130" />
+  <path d="M100,180 L300,180" />
+  <path d="M300,230 L100,230" />
 </svg>
 
 <script>
